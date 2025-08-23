@@ -1,6 +1,6 @@
 
 import 'package:equatable/equatable.dart';
-import 'package:teste_magnum/feature/home/domain/entities/post.dart';
+import 'package:teste_magnum/feature/post/domain/entities/post.dart';
 
 abstract class PostState extends Equatable {
   @override
@@ -17,3 +17,5 @@ class PostError extends PostState {
   final String message;
   PostError(this.message);
 }
+
+class PostCreated extends PostState {}

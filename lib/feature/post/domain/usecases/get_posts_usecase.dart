@@ -1,4 +1,5 @@
-import 'package:teste_magnum/feature/home/domain/repositores/post_repository.dart';
+
+import 'package:teste_magnum/feature/post/domain/repositories/post_repository.dart';
 
 import '../entities/post.dart';
 
@@ -11,3 +12,4 @@ class GetPostsUseCase {
     return await repository.getPosts();
   }
 }
+ 

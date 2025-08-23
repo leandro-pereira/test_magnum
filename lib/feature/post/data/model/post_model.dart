@@ -1,5 +1,5 @@
-import 'package:teste_magnum/feature/home/domain/entities/post.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:teste_magnum/feature/post/domain/entities/post.dart';
 
 part 'post_model.g.dart';
 

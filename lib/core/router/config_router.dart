@@ -17,6 +17,7 @@ sealed class AppRoute {
 
   // routes
   static const home = _Home();
+  static const post = _Post();
 }
 
 class _Home extends AppRoute {
@@ -27,4 +28,14 @@ class _Home extends AppRoute {
 
   @override
   String get name => 'home';
+}
+
+class _Post extends AppRoute {
+  const _Post();
+
+  @override
+  String get path => '/';
+
+  @override
+  String get name => 'post';
 }

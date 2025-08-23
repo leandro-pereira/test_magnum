@@ -1,4 +1,33 @@
 {
   "hello": "Olá",
-  "welcome": "Bem-vindo ao aplicativo"
+  "welcome": "Bem-vindo ao aplicativo",
+  "noPostsAvailable": "Nenhum post disponível",
+  "loading": "Carregando...",
+  "createPost"  : "Criar Post",
+  "postCreatedSuccessfully": "Post criado com sucesso!",
+  "postTitle": "Título do Post",
+  "postContent": "Conteúdo do Post",
+  "postContentPlaceholder": "Digite o conteúdo do post aqui...",
+  "postTitlePlaceholder": "Digite o título do post aqui...",
+  "postCreated": "Post criado",
+  "postDeleted": "Post excluído",
+  "postUpdated": "Post atualizado",
+  "deletePost": "Excluir Post",
+  "deletePostConfirmation": "Você tem certeza que deseja excluir este post?",
+  "delete": "Excluir",
+  "cancel": "Cancelar",
+  "editPostPlaceholder": "Editar o conteúdo do post aqui...",
+  "editPostTitlePlaceholder": "Editar o título do post aqui...",
+  "editPostSuccess": "Post editado com sucesso!",
+  "editPostError": "Erro ao editar o post",
+  "postNotFound": "Post não encontrado",
+  "postList": "Lista de Posts",
+  "viewPost": "Ver Post",
+  "viewPostDetails": "Ver Detalhes do Post",
+  "postDetails": "Detalhes do Post",
+
+  "editPost": "Editar Post",
+  "saving": "Salvando...",
+  "save": "Salvar"
+
 }

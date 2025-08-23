@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teste_magnum/core/translate/aplication/language_bloc.dart';
-import 'package:teste_magnum/feature/home/presentation/bloc/home_bloc.dart';
-import 'package:teste_magnum/feature/home/presentation/bloc/home_state.dart';
+import 'package:teste_magnum/feature/home/presentation/bloc/bloc_home.dart';
+import 'package:teste_magnum/feature/home/presentation/bloc/state_home.dart';
+import 'package:teste_magnum/feature/post/presentation/create_post.dart';
+import 'package:teste_magnum/feature/post/presentation/list_post.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
-
+  final pages = [
+    ListPostPage(),
+    CreatePostPage(),
+    const Center(child: Text("Configurações da Conta")),
+  ];
   @override
   Widget build(BuildContext context) {
+    final _bloc = context.read<HomeBloc>();
     final language = context.watch<LanguageBloc>();
-    // final _bloc = context.read<PostBloc>();
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
+      appBar: AppBar(title: const Text("Teste Magnum")),
       drawer: Drawer(
         child: ListView(
           children: [
@@ -24,41 +31,33 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          BlocBuilder<PostBloc, PostState>(
-            builder: (context, state) {
-              if (state is PostLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is PostLoaded) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.posts.length,
-                  itemBuilder: (context, index) {
-                    final post = state.posts[index];
-                    return ListTile(
-                      title: Text(post.title),
-                      subtitle: Text(post.body),
-                    );
-                  },
-                );
-              } else if (state is PostError) {
-                return Center(child: Text(state.message));
-              }
-              return const Center(child: Text('No posts available'));
-            },
-          ),
-        ],
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HomeError) {
+            return Center(child: Text(state.message));
+          } else if (state is HomePageChanged) {
+            return pages[state.index];
+          }
+          return pages[0];
+        },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Posts'),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Criar'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Conta'),
-        ],
-        currentIndex: 0,
-        onTap: (s) {},
+      bottomNavigationBar: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          int currentIndex = 0;
+          if (state is HomePageChanged) currentIndex = state.index;
+
+          return BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Posts'),
+              BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Criar'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Conta'),
+            ],
+            currentIndex: currentIndex,
+            onTap: _bloc.changePage,
+          );
+        },
       ),
     );
   }
